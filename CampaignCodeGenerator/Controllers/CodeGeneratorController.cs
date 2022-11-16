@@ -10,9 +10,15 @@ namespace CampaignCodeGenerator.Controllers
     {
         [Route("GetList")]
         [HttpGet]
-        public IEnumerable<String> GetList(int Count)
+        public IEnumerable<String> GetList(int CouponCount)
         {
             List<String> Coupons = new List<String>();
+
+            for(int CouponId = 1; CouponId <= CouponCount; CouponId++)
+            {
+                Coupons.Add(CouponId.ToString());
+            }
+
             return Coupons;
         }
 
