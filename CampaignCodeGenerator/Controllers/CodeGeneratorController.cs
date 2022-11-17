@@ -26,7 +26,7 @@ namespace CampaignCodeGenerator.Controllers
 
         //This method is to create "CodeCount" number of campaign codes and return them with their "Ids"...
         //...in case the user wants to keep track of the used codes in the future
-        [Route("GetListWithId")]
+        [Route("GetCodeListWithId")]
         [HttpGet]
         public IEnumerable<CampaignCodeModel> GetCodeListWithId(long CodeCount)
         {
