@@ -9,13 +9,14 @@ namespace CampaignCodeGenerator.Controllers
     [Route("[controller]")]
     public class CodeGeneratorController : Controller
     {
+        //This method is to create "CodeCount" number of campaign codes
         [Route("GetCodeList")]
         [HttpGet]
-        public IEnumerable<String> GetCodeList(int CodeCount)
+        public IEnumerable<String> GetCodeList(long CodeCount)
         {
             List<String> Codes = new List<String>();
 
-            for(int CodeId = 1; CodeId <= CodeCount; CodeId++)
+            for(long CodeId = 1; CodeId <= CodeCount; CodeId++)
             {
                 Codes.Add(CodeGenerationHelper.GenerateCode(CodeId));
             }
@@ -23,12 +24,14 @@ namespace CampaignCodeGenerator.Controllers
             return Codes;
         }
 
+        //This method is to create "CodeCount" number of campaign codes and return them with their "Ids"...
+        //...in case the user wants to keep track of the used codes in the future
         [Route("GetListWithId")]
         [HttpGet]
-        public IEnumerable<CampaignCodeModel> GetCodeListWithId(int CodeCount)
+        public IEnumerable<CampaignCodeModel> GetCodeListWithId(long CodeCount)
         {
             List<CampaignCodeModel> Codes = new List<CampaignCodeModel>();
-            for (int CodeId = 1; CodeId <= CodeCount; CodeId++)
+            for (long CodeId = 1; CodeId <= CodeCount; CodeId++)
             {
                 CampaignCodeModel newCode = new CampaignCodeModel();
                 newCode.Id = CodeId;
@@ -36,13 +39,6 @@ namespace CampaignCodeGenerator.Controllers
                 Codes.Add(newCode);
             }
             return Codes;
-        }
-
-        [Route("GetSingleCode")]
-        [HttpGet]
-        public String GetSingleCode(int CodeId)
-        {
-            return CodeGenerationHelper.GenerateCode(CodeId); ;
         }
     }
 }

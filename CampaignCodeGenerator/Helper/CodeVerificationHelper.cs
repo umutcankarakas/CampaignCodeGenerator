@@ -9,8 +9,11 @@ namespace CampaignCodeGenerator.Helper
         private static String charSet3 = "H45KLMNP45";
         private static int m = 39293;
         private static int s = 75321908;
-        public static bool VerifyCode(String Code)
+
+        //Checks if the code is valid
+        public static bool GetCodeValidity(String Code)
         {
+            if (Code.Length != 8) return false;
             for (int i = 0; i < Code.Length; i++)
             {
                 if (i % 3 == 0 && !charSet1.Contains(Code[i])) return false;
@@ -20,8 +23,10 @@ namespace CampaignCodeGenerator.Helper
             return true;
         }
 
-        public static int GetCodeIdFromCode(String Code, int CodeCount) {
-            for (int CodeId = 1; CodeId <= CodeCount; CodeId++)
+        //Checks if the code is exists in a given range
+        public static long GetCodeIdFromCode(String Code, long CodeCount) 
+        {
+            for (long CodeId = 1; CodeId <= CodeCount; CodeId++)
             {
                 if(CodeGenerationHelper.GenerateCode(CodeId) == Code)
                 {
@@ -31,5 +36,10 @@ namespace CampaignCodeGenerator.Helper
             return -1;
         }
 
+        //Checks if the code is valid and exists in a given range
+        public static bool VerifyCode(String Code, long CodeCount)
+        {
+            return GetCodeValidity(Code) && (GetCodeIdFromCode(Code, CodeCount) != -1);
+        }
     }
 }
